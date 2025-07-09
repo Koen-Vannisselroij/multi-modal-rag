@@ -10,9 +10,7 @@ def main():
         logger.error("No documents found in data/. Please add .txt files.")
         return
         
-    logger.info("Initializing retriever...")
     retriever = Retriever()
-    logger.info("Adding knowledge to retriever...")
     retriever.add_documents(docs)
 
     print("RAG pipeline ready. Type a query (or 'exit' to quit):")
