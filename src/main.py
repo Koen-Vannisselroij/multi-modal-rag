@@ -5,13 +5,11 @@ from logger import get_logger
 logger = get_logger(__name__)
 
 def main():
-    # 1. Ingest text data
     docs = ingest_data()
     if not docs:
         logger.error("No documents found in data/. Please add .txt files.")
         return
-
-    # 2. Initialize retriever and add documents
+        
     logger.info("Initializing retriever...")
     retriever = Retriever()
     logger.info("Adding knowledge to retriever...")
