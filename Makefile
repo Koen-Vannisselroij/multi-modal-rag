@@ -23,8 +23,6 @@ run:  ## Run the main application (optionally specify CONFIG=your_config.yaml)
 	fi
 	python src/main.py $(CONFIG)
 
-test:  ## Run all tests with pytest
-	pytest tests/
 
 EVAL_CASES ?= data/evaluate/cases/evaluate_text_retrieval_base.yaml
 
