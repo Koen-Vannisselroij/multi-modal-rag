@@ -11,6 +11,5 @@ def ingest_data(data_dir="data"):
             if fname.endswith(".txt"):
                 file_path = os.path.join(root, fname)
                 with open(file_path, "r", encoding="utf-8") as f:
-                    rel_path = os.path.relpath(file_path, data_dir)
-                    docs.append({"filename": rel_path, "content": f.read()})
+                    docs.append({"filename": fname, "content": f.read()})
     return docs
