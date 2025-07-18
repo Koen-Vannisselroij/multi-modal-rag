@@ -1,0 +1,5 @@
+backend: chroma
+chroma:
+  client: local  
+  embedding_function: sentence_transformers 
+tfidf: {} 

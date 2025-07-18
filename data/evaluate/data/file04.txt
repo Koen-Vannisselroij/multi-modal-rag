@@ -1,0 +1,2 @@
+Title: Artificial Intelligence
+Artificial intelligence enables machines to learn from data and perform tasks that require human intelligence. 
