@@ -1,6 +1,9 @@
-from retrieval.exceptions import CollectionAlreadyExistsException, CollectionNotSetException
 from retrieval.domain import CollectionItem, CollectionType
-from retrieval.retriever_base import BaseTextRetriever, BaseImageRetriever, BaseCollectionManager
+from retrieval.retriever_base import (
+    BaseTextRetriever,
+    BaseImageRetriever,
+    BaseCollectionManager,
+)
 from retrieval.tfidf_retriever import TfidfTextRetriever, TfidfCollectionManager
 from retrieval.chroma_retriever import ChromaTextRetriever, ChromaImageRetriever
 from retrieval.collection_manager import ChromaMultiModalCollectionManager
@@ -16,4 +19,8 @@ __all__ = [
     "ChromaImageRetriever",
     "ChromaMultiModalCollectionManager",
     "ChromaMultiModalRetriever",
+    "CollectionAlreadyExistsException",
+    "CollectionNotSetException",
+    "CollectionItem",
+    "CollectionType",
 ]

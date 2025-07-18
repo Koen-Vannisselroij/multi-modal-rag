@@ -1,10 +1,10 @@
 import uuid
 from typing import List
-import chromadb
 from chromadb.utils.data_loaders import ImageLoader
 from .domain import CollectionItem, CollectionType
 from .exceptions import CollectionAlreadyExistsException, CollectionNotSetException
 from .retriever_base import BaseCollectionManager
+
 
 class ChromaMultiModalCollectionManager(BaseCollectionManager):
     def __init__(self, client, embedding_function):
@@ -56,7 +56,7 @@ class ChromaMultiModalCollectionManager(BaseCollectionManager):
         collection.add(
             ids=ids,
             documents=[doc["content"] for doc in knowledge],
-            metadatas=[{"filename": filename} for filename in filenames]
+            metadatas=[{"filename": filename} for filename in filenames],
         )
 
     def add_image_knowledge(self, knowledge: List[CollectionItem]):
@@ -71,4 +71,4 @@ class ChromaMultiModalCollectionManager(BaseCollectionManager):
 
     def get_collection(self):
         # Return the text collection for compatibility
-        return self._get_collection(CollectionType.TEXT), None, None 
+        return self._get_collection(CollectionType.TEXT), None, None

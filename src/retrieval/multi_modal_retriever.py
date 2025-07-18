@@ -1,5 +1,6 @@
 from .retriever_base import BaseTextRetriever, BaseImageRetriever
 
+
 class ChromaMultiModalRetriever:
     def __init__(
         self, text_retriever: BaseTextRetriever, image_retriever: BaseImageRetriever
@@ -11,4 +12,4 @@ class ChromaMultiModalRetriever:
         return self.text_retriever.retrieve_texts(query, top_k)
 
     def retrieve_images(self, query, top_k=5):
-        return self.image_retriever.retrieve_images(query, top_k) 
+        return self.image_retriever.retrieve_images(query, top_k)

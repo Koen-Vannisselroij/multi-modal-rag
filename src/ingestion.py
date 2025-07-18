@@ -1,5 +1,6 @@
 import os
 
+
 class DataIngestor:
     def __init__(self, text_dir="data/sample_texts", image_dir="data/sample_images"):
         self.text_dir = text_dir
@@ -21,7 +22,10 @@ class DataIngestor:
         def read_text_file(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 return f.read()
-        return self.ingest_files(self.text_dir, self.text_exts, process_file=read_text_file)
+
+        return self.ingest_files(
+            self.text_dir, self.text_exts, process_file=read_text_file
+        )
 
     def ingest_image_data(self):
         return self.ingest_files(self.image_dir, self.image_exts)

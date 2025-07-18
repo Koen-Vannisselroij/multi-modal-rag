@@ -6,6 +6,7 @@ from logger import get_logger
 
 logger = get_logger(__name__)
 
+
 class TfidfCollectionManager(BaseCollectionManager):
     def __init__(self):
         self.docs = []
@@ -23,6 +24,7 @@ class TfidfCollectionManager(BaseCollectionManager):
     def get_collection(self):
         return self.docs, self.doc_vectors, self.vectorizer
 
+
 class TfidfTextRetriever(BaseTextRetriever):
     def __init__(self, collection_manager: TfidfCollectionManager):
         self.collection_manager = collection_manager
@@ -39,10 +41,15 @@ class TfidfTextRetriever(BaseTextRetriever):
         results = []
         for i in top_indices:
             doc = docs[i]
-            results.append(TextRetrievalResult(
-                content=doc.get("content"),
-                id=doc.get("id"),
-                metadatas={"filename": doc.get("filename")} if doc.get("filename") else None,
-            )
+            results.append(
+                TextRetrievalResult(
+                    content=doc.get("content"),
+                    id=doc.get("id"),
+                    metadatas=(
+                        {"filename": doc.get("filename")}
+                        if doc.get("filename")
+                        else None
+                    ),
+                )
             )
         return results
