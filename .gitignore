@@ -8,3 +8,20 @@ wheels/
 
 # Virtual environments
 .venv
+.env/
+env/
+
+# macOS system files
+.DS_Store
+
+# Editor directories and files
+.vscode/
+.idea/
+
+# Test and coverage outputs
+htmlcov/
+.coverage
+coverage.xml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
