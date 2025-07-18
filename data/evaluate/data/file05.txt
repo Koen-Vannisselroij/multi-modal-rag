@@ -1,0 +1,2 @@
+Title: The Internet of Things
+The Internet of Things connects everyday devices to the internet, allowing them to send and receive data. 
