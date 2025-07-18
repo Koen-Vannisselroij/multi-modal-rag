@@ -14,24 +14,33 @@ init:  ## Set up the virtual environment and install dependencies
 	@echo "Entering virtual environment. Type 'exit' to leave."
 	@. .venv/bin/activate; bash
 
-run:  ## Run the main application
-	python src/main.py
+CONFIG ?= example_config.yaml
+
+run:  ## Run the main application (optionally specify CONFIG=your_config.yaml)
+	@if [ ! -f $(CONFIG) ]; then \
+		echo "Error: $(CONFIG) not found. Please provide a config YAML file."; \
+		exit 1; \
+	fi
+	python src/main.py $(CONFIG)
 
 test:  ## Run all tests with pytest
 	pytest tests/
 
-EVAL_CASES ?= data/evaluate/cases/evaluate_retrieval_base.yaml
+EVAL_CASES ?= data/evaluate/cases/evaluate_text_retrieval_base.yaml
 
-evaluate-retrieval:  ## Run the retrieval accuracy evaluation script
+CONFIG_EVAL ?= example_config.yaml
+
+evaluate-text-retrieval:  ## Run the text retrieval accuracy evaluation script
 	@if [ ! -f $(EVAL_CASES) ]; then \
 		echo "Error: $(EVAL_CASES) not found. Please provide a test cases YAML file."; \
 		exit 1; \
 	fi
-	@echo "Running retrieval accuracy evaluation with test cases: $(EVAL_CASES)"
-	@echo "Test cases file: $(EVAL_CASES)"
-	@echo "Data folder: data/evaluate/data/"
-	@echo "Cases folder: data/evaluate/cases/"
-	PYTHONPATH=src python scripts/evaluate_retrieval_accuracy.py $(EVAL_CASES)
+	@if [ ! -f $(CONFIG_EVAL) ]; then \
+		echo "Error: $(CONFIG_EVAL) not found. Please provide a config YAML file."; \
+		exit 1; \
+	fi
+	@echo "Running text retrieval accuracy evaluation with test cases: $(EVAL_CASES) and config: $(CONFIG_EVAL)"
+	PYTHONPATH=src python scripts/evaluate_text_retrieval_accuracy.py $(EVAL_CASES) $(CONFIG_EVAL)
 
 clean:  ## Remove caches and the virtual environment
 	rm -rf __pycache__ .pytest_cache .venv

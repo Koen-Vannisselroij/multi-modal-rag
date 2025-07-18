@@ -1,6 +1,6 @@
 import yaml
 import sys
-from ingestion import ingest_data
+from ingestion import DataIngestor
 from logger import get_logger
 from main import get_retriever_and_manager
 
@@ -20,12 +20,17 @@ def setup_collections(collection_manager, docs, backend):
         collection_manager.add_documents(docs)
 
 def main():
+    if len(sys.argv) < 3:
+        print("Usage: python evaluate_text_retrieval_accuracy.py <test_cases.yaml> <config.yaml>")
+        sys.exit(1)
     test_cases_path = sys.argv[1]
+    config_path = sys.argv[2]
     test_cases = load_test_cases(test_cases_path)
 
-    with open("config.yaml", "r") as f:
+    with open(config_path, "r") as f:
         config = yaml.safe_load(f)
-    docs = ingest_data()
+    ingestor = DataIngestor(text_dir="data/evaluate")
+    docs = ingestor.ingest_text_data()
     collection_manager, retriever = get_retriever_and_manager(config)
     setup_collections(collection_manager, docs, config["backend"])
 
@@ -33,7 +38,7 @@ def main():
     print("\nRetrieval Accuracy Test Results:\n" + "-"*40)
     for idx, (question, expected_filename) in enumerate(test_cases, 1):
         results = retriever.retrieve_texts(question, top_k=1)
-        result_filename = results[0].filename if results else None
+        result_filename = results[0][0].filename if results else None
 
         if result_filename == expected_filename:
             status = "✓"
